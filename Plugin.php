@@ -18,6 +18,12 @@ class Plugin extends \MapasCulturais\Plugin
         $app->hook('template(site.index.home-search):after', function() {
             echo "<h1>TESTE</h1>"; 
         });
+
+        $app->hook('GET(prestacao-de-contas.<<*>>):before', function() use($app) {
+            $app->view->enqueueScript('app', 'ng.mc.module.notifications', 'js/ng.mc.module.notifications.js');
+            $app->view->enqueueScript('app', 'ng.mc.directive.editBox', 'js/ng.mc.directive.editBox.js');
+            $app->view->enqueueScript('app', 'ng.prestacao-de-contas', 'js/ng.prestacao-de-contas.js', ['mapasculturais']);
+        });
     }
 
     function register()
